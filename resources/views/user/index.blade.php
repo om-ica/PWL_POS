@@ -56,7 +56,7 @@ Pengguna</th><th>Aksi</th></tr>
               "dataType": "json", 
               "type": "POST",
               "data": function (d) {
-                d.level_id = $('level_id').val();
+                d.level_id = $('#level_id').val();
               } 
           }, 
           columns: [ 
@@ -92,7 +92,7 @@ Pengguna</th><th>Aksi</th></tr>
             } 
           ] 
       });
-        $('level_id').on('change', function(){
+        $('#level_id').on('change', function(){
         dataUser.ajax.reload();
         });
     }); 
