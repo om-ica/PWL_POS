@@ -41,8 +41,7 @@ Pengguna</th><th>Aksi</th></tr>
       </table> 
     </div> 
   </div>
-  <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-
-  backdrop="static" data-keyboard="false" data-wid="75%" aria-hidden="true"></div> 
+  <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-wid="75%" aria-hidden="true"></div> 
 @endsection  
  
 @push('css') 
