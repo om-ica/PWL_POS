@@ -32,8 +32,7 @@
                 </div>
             </div>
         </div>
-        <table class="table table-bordered table-striped table-hover table-sm" 
-id="table_barang"> 
+        <table class="table table-bordered table-striped table-hover table-sm" id="table_barang"> 
           <thead> 
             <tr>
               <th>ID</th>
