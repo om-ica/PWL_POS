@@ -50,10 +50,10 @@ Route::group(['prefix' => 'level'], function () {
     Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']); // menampilkan detail level menggunakan ajax
     Route::get('/{id}/edit', [LevelController::class, 'edit']); // menampilkan halaman form edit level
     Route::put('/{id}', [LevelController::class, 'update']); // menyimpan perubahan data level
-    Route::get('/{id}/edit_ajax', [LevelController::class, 'edit_ajax']); // menampilkan halaman form edit user ajax
-    Route::put('/{id}/update_ajax', [LevelController::class, 'update_ajax']); // menyimpan perubahan data user ajax
-    Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']); // menampilkan halaman form delete user ajax
-    Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']); // menghapus data user menggunakan ajax
+    Route::get('/{id}/edit_ajax', [LevelController::class, 'edit_ajax']); // menampilkan halaman form edit level ajax
+    Route::put('/{id}/update_ajax', [LevelController::class, 'update_ajax']); // menyimpan perubahan data level ajax
+    Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']); // menampilkan halaman form delete level ajax
+    Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']); // menghapus data level menggunakan ajax
     Route::delete('/{id}', [LevelController::class, 'destroy']); // menghapus data level
 });
 
@@ -68,10 +68,10 @@ Route::group(['prefix' => 'kategori'], function () {
     Route::get('/{id}', [KategoriController::class, 'show']); // menampilkan detail kategori
     Route::get('/{id}/edit', [KategoriController::class, 'edit']); // menampilkan halaman form edit kategori
     Route::put('/{id}', [KategoriController::class, 'update']); // menyimpan perubahan data kategori
-    Route::get('/{id}/edit_ajax', [KategoriController::class, 'edit_ajax']); // menampilkan halaman form edit user ajax
-    Route::put('/{id}/update_ajax', [KategoriController::class, 'update_ajax']); // menyimpan perubahan data user ajax
-    Route::get('/{id}/delete_ajax', [KategoriController::class, 'confirm_ajax']); // menampilkan halaman form delete user ajax
-    Route::delete('/{id}/delete_ajax', [KategoriController::class, 'delete_ajax']); // menghapus data user menggunakan ajax
+    Route::get('/{id}/edit_ajax', [KategoriController::class, 'edit_ajax']); // menampilkan halaman form edit kategori ajax
+    Route::put('/{id}/update_ajax', [KategoriController::class, 'update_ajax']); // menyimpan perubahan data kategori ajax
+    Route::get('/{id}/delete_ajax', [KategoriController::class, 'confirm_ajax']); // menampilkan halaman form delete kategori ajax
+    Route::delete('/{id}/delete_ajax', [KategoriController::class, 'delete_ajax']); // menghapus data kategori menggunakan ajax
     Route::delete('/{id}', [KategoriController::class, 'destroy']); // menghapus data kategori
 });
 
@@ -80,9 +80,16 @@ Route::group(['prefix' => 'supplier'], function () {
     Route::post('/list', [SupplierController::class, 'list']); // menampilkan data supplier dalam bentuk JSON untuk datatables
     Route::get('/create', [SupplierController::class, 'create']); // menampilkan halaman form tambah supplier
     Route::post('/', [SupplierController::class, 'store']); // menyimpan data supplier baru
+    Route::get('/create_ajax', [SupplierController::class, 'create_ajax']); // menampilkan halaman form untuk tambah supplier Ajax
+    Route::post('/ajax', [SupplierController::class, 'store_ajax']); // menyimpan data supplier baru Ajax
+    Route::get('/{id}/show_ajax', [SupplierController::class, 'show_ajax']); // menampilkan detail supplier menggunakan ajax
     Route::get('/{id}', [SupplierController::class, 'show']); // menampilkan detail supplier
     Route::get('/{id}/edit', [SupplierController::class, 'edit']); // menampilkan halaman form edit supplier
     Route::put('/{id}', [SupplierController::class, 'update']); // menyimpan perubahan data supplier
+    Route::get('/{id}/edit_ajax', [SupplierController::class, 'edit_ajax']); // menampilkan halaman form edit supplier ajax
+    Route::put('/{id}/update_ajax', [SupplierController::class, 'update_ajax']); // menyimpan perubahan data supplier ajax
+    Route::get('/{id}/delete_ajax', [SupplierController::class, 'confirm_ajax']); // menampilkan halaman form delete supplier ajax
+    Route::delete('/{id}/delete_ajax', [SupplierController::class, 'delete_ajax']); // menghapus data supplier menggunakan ajax
     Route::delete('/{id}', [SupplierController::class, 'destroy']); // menghapus data supplier
 });
 
