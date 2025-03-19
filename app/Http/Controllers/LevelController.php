@@ -130,6 +130,7 @@ class LevelController extends Controller
         redirect('/');
     }
 
+    // untuk menampilkan detail level menggunakan ajax
     public function show_ajax(string $id)
     {
         $level = LevelModel::find($id);
@@ -270,5 +271,4 @@ class LevelController extends Controller
         }
         return redirect('/');
     }
-
 }
