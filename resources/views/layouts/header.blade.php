@@ -126,10 +126,22 @@
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="fas fa-th-large"></i>
         </a>
-      </li>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a href="#" class="dropdown-item">
+                <i class="fas fa-user-circle mr-2"></i> Profile
+            </a>
+            <div class="dropdown-divider"></div>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="dropdown-item text-danger">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                </button>
+            </form>
+        </div>
+    </li>
     </ul>
   </nav>
