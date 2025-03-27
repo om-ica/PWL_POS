@@ -56,6 +56,13 @@
           <!-- /.col --> 
         </div> 
       </form> 
+
+      <div class="text-center mt-3 d-flex justify-content-center align-items-center">
+        <p class="mb-0">Don't have an account?</p>
+        <a href="{{ url('/register') }}" class="btn btn-link text-primary">
+          Sign Up
+        </a>
+      </div>
     </div> 
     <!-- /.card-body --> 
   </div> 
@@ -85,7 +92,7 @@
   $(document).ready(function() { 
     $("#form-login").validate({ 
       rules: { 
-        username: {required: true, minlength: 4, maxlength: 20}, 
+        username: {required: true, minlength: 3, maxlength: 20}, 
         password: {required: true, minlength: 5, maxlength: 20} 
       }, 
       submitHandler: function(form) { // ketika valid, maka bagian yg akan dijalankan 
@@ -97,7 +104,7 @@
             if(response.status){ // jika sukses 
               Swal.fire({ 
                   icon: 'success', 
-                  title: 'Berhasil', 
+                  title: 'Succes', 
                   text: response.message, 
               }).then(function() { 
                   window.location = response.redirect; 
@@ -109,7 +116,7 @@
               }); 
               Swal.fire({ 
                   icon: 'error', 
-                  title: 'Terjadi Kesalahan', 
+                  title: 'Error', 
                   text: response.message 
               }); 
             } 
