@@ -127,8 +127,9 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
             Route::get('/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']); // menampilkan halaman form delete barang ajax
             Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); // menghapus data barang menggunakan ajax
             Route::delete('/{id}', [BarangController::class, 'destroy']); // menghapus data barang
-            Route::get('/import', [BarangController::class, 'import']);
-            Route::post('/import_ajax', [BarangController::class, 'import_ajax']);
+            Route::get('/import', [BarangController::class, 'import']); // form ajax untuk menunggah excel data barang
+            Route::post('/import_ajax', [BarangController::class, 'import_ajax']); //untuk mengelola import data barang
+            Route::get('/export_excel', [BarangController::class, 'export_excel']); // untuk mengekspor data barang yang telah ada
         });
     });
 });
