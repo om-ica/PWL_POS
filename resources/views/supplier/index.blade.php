@@ -5,8 +5,10 @@
       <div class="card-header"> 
         <h3 class="card-title">{{ $page->title }}</h3> 
         <div class="card-tools"> 
-          <a class="btn btn-sm btn-primary mt-1" href="{{ url('supplier/create') }}">Tambah</a>
-          <button onclick="modalAction('{{ url('supplier/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>  
+          <button onclick="modalAction('{{ url('/supplier/import') }}')" class="btn btn-info">Import Supplier</button> 
+          <a href="{{ url('/supplier/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Supplier</a>
+          <a href="{{ url('/supplier/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Supplier</a>  
+          <button onclick="modalAction('{{ url('/supplier/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button> 
         </div> 
       </div> 
       <div class="card-body"> 
@@ -41,9 +43,9 @@
         $('#myModal').modal('show'); 
       }); 
     }
-  var dataUser; 
+  var dataSupplier; 
     $(document).ready(function() { 
-      dataUser = $('#table_supplier').DataTable({ 
+      dataSupplier = $('#table_supplier').DataTable({ 
           // serverSide: true, jika ingin menggunakan server side processing 
           serverSide: true,      
           ajax: { 
@@ -58,36 +60,41 @@
             {
                  // nomor urut dari laravel datatable addIndexColumn() 
               data: "DT_RowIndex",             
-              className: "text-center", 
+              className: "text-center",
+              width: "5%", 
               orderable: false, 
               searchable: false     
             },{ 
               data: "supplier_kode",                
               className: "", 
+              width: "10%",
               // orderable: true, jika ingin kolom ini bisa diurutkan  
               orderable: true,     
               // searchable: true, jika ingin kolom ini bisa dicari 
               searchable: true     
             },{ 
               data: "supplier_nama",                
-              className: "", 
+              className: "",
+              width: "10%", 
               orderable: true,     
               searchable: true     
             },{ 
               data: "supplier_alamat",                
-              className: "", 
+              className: "",
+              width: "15%", 
               orderable: true,     // orderable: true, jika ingin kolom ini bisa diurutkan
               searchable: true     // searchable: ture, jika ingin kolom bisa dicari 
             },{ 
               data: "aksi",                
-              className: "", 
+              className: "",
+              width: "14%", 
               orderable: false,   // orderable: true, jika ingin kolom ini bisa diurutkan  
               searchable: false   // searchable: ture, jika ingin kolom bisa dicari 
             } 
           ] 
       });
         $('#supplier_id').on('change', function(){
-        dataUser.ajax.reload();
+        dataSupplier.ajax.reload();
         });
     }); 
   </script> 

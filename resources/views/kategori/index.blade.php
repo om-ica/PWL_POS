@@ -5,8 +5,10 @@
       <div class="card-header"> 
         <h3 class="card-title">{{ $page->title }}</h3> 
         <div class="card-tools"> 
-          <a class="btn btn-sm btn-primary mt-1" href="{{ url('kategori/create') }}">Tambah</a>
-          <button onclick="modalAction('{{ url('kategori/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button> 
+          <button onclick="modalAction('{{ url('/kategori/import') }}')" class="btn btn-info">Import kategori</button> 
+          <a href="{{ url('/kategori/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Kategori</a>
+          <a href="{{ url('/kategori/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Kategori</a>  
+          <button onclick="modalAction('{{ url('/kategori/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button> 
         </div> 
       </div> 
       <div class="card-body"> 
@@ -36,9 +38,9 @@
         $('#myModal').modal('show'); 
       }); 
     }
-  var dataUser; 
+  var dataKategori; 
     $(document).ready(function() { 
-      dataUser = $('#table_kategori').DataTable({ 
+      dataKategori = $('#table_kategori').DataTable({ 
           // serverSide: true, jika ingin menggunakan server side processing 
           serverSide: true,      
           ajax: { 
@@ -53,31 +55,35 @@
             {
                  // nomor urut dari laravel datatable addIndexColumn() 
               data: "DT_RowIndex",             
-              className: "text-center", 
+              className: "text-center",
+              width: "5%", 
               orderable: false, 
               searchable: false     
             },{ 
               data: "kategori_kode",                
-              className: "", 
+              className: "",
+              width: "10%", 
               // orderable: true, jika ingin kolom ini bisa diurutkan  
               orderable: true,     
               // searchable: true, jika ingin kolom ini bisa dicari 
               searchable: true     
             },{ 
               data: "kategori_nama",                
-              className: "", 
+              className: "",
+              width: "14%", 
               orderable: true,     
               searchable: true     
             },{ 
               data: "aksi",                
-              className: "", 
+              className: "",
+              width: "14%", 
               orderable: false,   // orderable: true, jika ingin kolom ini bisa diurutkan  
               searchable: false   // searchable: ture, jika ingin kolom bisa dicari 
             } 
           ] 
       });
         $('#kategori_id').on('change', function(){
-        dataUser.ajax.reload();
+        dataKategori.ajax.reload();
         });
     }); 
   </script> 

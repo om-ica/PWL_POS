@@ -5,8 +5,10 @@
       <div class="card-header"> 
         <h3 class="card-title">{{ $page->title }}</h3> 
         <div class="card-tools"> 
-          <a class="btn btn-sm btn-primary mt-1" href="{{ url('user/create') }}">Tambah</a>
-          <button onclick="modalAction('{{ url('user/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button> 
+          <button onclick="modalAction('{{ url('/user/import') }}')" class="btn btn-info">Import User</button> 
+          <a href="{{ url('/user/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export User</a>
+          <a href="{{ url('/user/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export User</a>  
+          <button onclick="modalAction('{{ url('/user/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button> 
         </div> 
       </div> 
       <div class="card-body"> 
@@ -35,8 +37,7 @@
         <table class="table table-bordered table-striped table-hover table-sm" 
 id="table_user"> 
           <thead> 
-            <tr><th>ID</th><th>Username</th><th>Nama</th><th>Level 
-Pengguna</th><th>Aksi</th></tr> 
+            <tr><th>ID</th><th>Username</th><th>Nama</th><th>Level Pengguna</th><th>Aksi</th></tr> 
           </thead> 
       </table> 
     </div> 
@@ -71,30 +72,35 @@ Pengguna</th><th>Aksi</th></tr>
             {
               // nomor urut dari laravel datatable addIndexColumn() 
               data: "DT_RowIndex",             
-              className: "text-center", 
+              className: "text-center",
+              width: "5%", 
               orderable: false, 
               searchable: false     
             },{ 
               data: "username",                
-              className: "", 
+              className: "",
+              width: "10%", 
               // orderable: true, jika ingin kolom ini bisa diurutkan  
               orderable: true,     
               // searchable: true, jika ingin kolom ini bisa dicari 
               searchable: true     
             },{ 
               data: "nama",                
-              className: "", 
+              className: "",
+              width: "37%", 
               orderable: true,     
               searchable: true     
             },{ 
               // mengambil data level hasil dari ORM berelasi 
               data: "level.level_nama",                
-              className: "", 
+              className: "",
+              width: "14%", 
               orderable: false,     
               searchable: false     
             },{ 
               data: "aksi",                
-              className: "", 
+              className: "",
+              width: "14%", 
               orderable: false,   // orderable: true, jika ingin kolom ini bisa diurutkan  
               searchable: false   // searchable: ture, jika ingin kolom bisa dicari 
             } 
