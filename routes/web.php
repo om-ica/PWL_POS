@@ -129,7 +129,8 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
             Route::delete('/{id}', [BarangController::class, 'destroy']); // menghapus data barang
             Route::get('/import', [BarangController::class, 'import']); // form ajax untuk menunggah excel data barang
             Route::post('/import_ajax', [BarangController::class, 'import_ajax']); //untuk mengelola import data barang
-            Route::get('/export_excel', [BarangController::class, 'export_excel']); // untuk mengekspor data barang yang telah ada
+            Route::get('/export_excel', [BarangController::class, 'export_excel']); // untuk mengekspor data barang ke excel
+            Route::get('/export_pdf', [BarangController::class, 'export_pdf']); // untuk mengekspor data barang ke pdf
         });
     });
 });
