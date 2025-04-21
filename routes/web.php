@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Welcomecontroller;
@@ -19,6 +20,9 @@ Route::post('register', [AuthController::class, 'postregister']);
 
 Route::middleware(['auth'])->group(function () { // artinya semua route di dalam group ini harus login dulu
     Route::get('/', [Welcomecontroller::class, 'index']);
+    Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
+    Route::post('/profile/upload', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::delete('profile/delete',[ProfileController::class, 'delete'])->name('profile.delete');
 
     Route::middleware(['authorize:ADM'])->group(function () {
         Route::group(['prefix' => 'user'], function () {
@@ -29,6 +33,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
             Route::get('/create_ajax', [UserController::class, 'create_ajax']); // menampilkan halaman form untuk tambah user Ajax
             Route::post('/ajax', [UserController::class, 'store_ajax']); // menyimpam data user baru Ajax
             Route::get('/{id}', [UserController::class, 'show']); // menampilkan detail user
+            Route::get('/{id}/show_ajax', [UserController::class, 'show_ajax']); // menampilkan detail user menggunakan ajax
             Route::get('/{id}/edit', [UserController::class, 'edit']); // menampilkan halaman form edit user
             Route::put('/{id}', [UserController::class, 'update']); // menyimpan perubahan data user
             Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']); // menampilkan halaman form edit user ajax

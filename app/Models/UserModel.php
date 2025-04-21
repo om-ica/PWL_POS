@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable; // implementasi Authenticatable
 
+
 class UserModel extends Authenticatable
 {
     use HasFactory;
@@ -14,7 +15,7 @@ class UserModel extends Authenticatable
     protected $table = 'm_user'; //Mendefinisikan nama tabel yang digunakan oleh model ini
     protected $primaryKey = 'user_id'; //Mendifinisikan primary key dari tabel yang digunakan
 
-    protected $fillable = ['level_id','username', 'nama', 'password'];
+    protected $fillable = ['level_id','username', 'nama', 'password', 'foto'];
 
     protected $hidden = ['password']; // jangan ditampilkan saat select
 

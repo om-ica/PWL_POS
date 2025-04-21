@@ -98,5 +98,4 @@ class AuthController extends Controller
         // Jika bukan AJAX, kembalikan ke halaman utama
         return redirect('/');
     }
-
 }
