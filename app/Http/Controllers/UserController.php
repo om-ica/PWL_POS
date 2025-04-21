@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -149,6 +150,14 @@ class UserController extends Controller
         $activeMenu = 'user'; // set menu yang sedang aktif
 
         return view('user.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'activeMenu' => $activeMenu]);
+    }
+
+    // menampilkan detail barang menggunakan ajax
+    public function show_ajax(string $id)
+    {
+        $user = UserModel::with('level')->find($id);
+
+        return view('user.show_ajax', ['user' => $user]);
     }
 
     // Menampilkan halaman form edit user
@@ -355,7 +364,7 @@ class UserController extends Controller
     public function export_excel()
     {
         // ambil data barang yang akan di export
-        $user = UserModel::select('level_id', 'username', 'nama')
+        $user = UserModel::select('level_id', 'username', 'nama', 'foto')
             ->orderBy('level_id')
             ->with('level')
             ->get();
@@ -368,8 +377,9 @@ class UserController extends Controller
         $sheet->setCellValue('B1', 'Username');
         $sheet->setCellValue('C1', 'Nama');
         $sheet->setCellValue('D1', 'Level Pengguna');
+        $sheet->setCellValue('E1', 'Foto Pengguna');
 
-        $sheet->getStyle('A1:D1')->getFont()->setBold(true); // untuk bold header
+        $sheet->getStyle('A1:E1')->getFont()->setBold(true); // untuk bold header
 
         $no = 1;        // nomor data dimulai dari 1
         $baris = 2;     // baris data dimulai dari baris ke-2
@@ -378,11 +388,26 @@ class UserController extends Controller
             $sheet->setCellValue('B' . $baris, $value->username);
             $sheet->setCellValue('C' . $baris, $value->nama);
             $sheet->setCellValue('D' . $baris, $value->level->level_nama); // ambil nama kategori
+
+            // path gambar (pastikan path benar dan gambar ada)
+            $imagePath = public_path('storage/profile/' . $value->foto);
+            if (file_exists($imagePath)) {
+                $drawing = new Drawing();
+                $drawing->setName('Foto');
+                $drawing->setDescription('Foto Pengguna');
+                $drawing->setPath($imagePath); // path file gambar
+                $drawing->setHeight(50); // tinggi gambar
+                $drawing->setCoordinates('E' . $baris); // posisi sel
+                $drawing->setWorksheet($sheet); // set ke worksheet
+            } else {
+                $sheet->setCellValue('E' . $baris, 'Foto tidak ditemukan');
+            }
+
             $baris++;
             $no++;
         }
 
-        foreach (range('A', 'F') as $columnID) {
+        foreach (range('A', 'E') as $columnID) {
             $sheet->getColumnDimension($columnID)->setAutoSize(true); // set auto size untuk kolom
         }
 
@@ -407,10 +432,15 @@ class UserController extends Controller
     public function export_pdf()
     {
         // ambil data barang yang akan di export
-        $user = UserModel::select('level_id', 'username', 'nama')
+        $user = UserModel::select('level_id', 'username', 'nama', 'foto')
             ->orderBy('level_id')
             ->with('level')
             ->get();
+
+        // Menambahkan URL gambar untuk setiap foto pengguna
+        foreach ($user as $u) {
+            $u->foto = asset('storage/profile/' . $u->foto); //Mengambil foto di direktori 'storage/fotos'
+        }
 
         // user Barryvdh\DomPDF\Facade\PDF
         $pdf = Pdf::loadView('user.export_pdf', ['user' => $user]);
